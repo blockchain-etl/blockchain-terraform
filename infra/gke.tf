@@ -50,10 +50,13 @@ resource "google_container_cluster" "gke_cluster_0" {
     update = "60m"
     delete = "30m"
   }
-  provisioner "local-exec" {
-    command = "gcloud container clusters get-credentials ${var.GKE_CLUSTER_NAME} --project=${var.GCP_PROJECT_ID} --zone=${var.GKE_MASTER_ZONE} && kubectl config rename-context  gke_${var.GCP_PROJECT_ID}_${var.GKE_MASTER_ZONE}_${var.GKE_CLUSTER_NAME}  ${var.K8S_CONTEXT}"
-  }
+}
 
+resource "null_resource" "local_k8s_context" {
+  depends_on = [google_container_cluster.gke_cluster_0]
+  provisioner "local-exec" {
+    command = "gcloud container clusters get-credentials ${var.GKE_CLUSTER_NAME} --project=${var.GCP_PROJECT_ID} --zone=${var.GKE_MASTER_ZONE} && ( kubectl config delete-context ${var.K8S_CONTEXT}; kubectl config rename-context gke_${var.GCP_PROJECT_ID}_${var.GKE_MASTER_ZONE}_${var.GKE_CLUSTER_NAME} ${var.K8S_CONTEXT} )"
+  }
 }
 
 resource "google_container_node_pool" "gke_pool_0" {
