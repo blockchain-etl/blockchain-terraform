@@ -50,3 +50,13 @@ variable "K8S_CONTEXT" {
   default = ""
   type    = string
 }
+
+variable "IP_ADDRESS_REGION" {
+  default = ""
+  type    = string
+}
+
+variable "IP_ADDRESS_NAME_PREFIX" {
+  default = ""
+  type    = string
+}
