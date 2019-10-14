@@ -39,7 +39,7 @@ resource "google_container_cluster" "gke_cluster_0" {
     dynamic "cidr_blocks" {
       for_each = var.GKE_MASTER_AUTHORIZED_NETWORKS
       content {
-          cidr_block = cidr_blocks.value
+        cidr_block = cidr_blocks.value
       }
     }
   }
@@ -67,8 +67,8 @@ resource "google_container_node_pool" "gke_pool_0" {
   location   = var.GKE_MASTER_ZONE
   cluster    = google_container_cluster.gke_cluster_0.name
 
-//  this is default behavior
-//  node_locations = var.GKE_NODE_LOCATIONS
+  //  this is default behavior
+  //  node_locations = var.GKE_NODE_LOCATIONS
 
   node_count = 1
   autoscaling {
