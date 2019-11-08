@@ -93,7 +93,7 @@ resource "google_container_node_pool" "gke_pool_0" {
 
     preemptible  = true
     machine_type = var.GKE_NODE_MACHINE_TYPE
-
+    image_type   = var.GKE_NODE_IMAGE_TYPE
     metadata = {
       disable-legacy-endpoints = "true"
     }
