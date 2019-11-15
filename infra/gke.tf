@@ -83,8 +83,8 @@ resource "google_container_node_pool" "gke_pool_0" {
 
   timeouts {
     create = "30m"
-    update = "10m"
-    delete = "10m"
+    update = "20m"
+    delete = "20m"
   }
 
   node_config {
