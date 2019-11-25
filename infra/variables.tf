@@ -96,6 +96,7 @@ variable "PUBSUB" {
     topic_name_prefix          = "crypto_"
     subscription_name_prefix   = "crypto_"
     subscription_name_suffix   = "dataflow.bigquery"
+    expiration_policy_ttl      = "" # empty means expire never 
   }
   type = map(any)
 }

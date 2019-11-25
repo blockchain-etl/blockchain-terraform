@@ -22,6 +22,7 @@ resource "google_pubsub_subscription" "btcl_blocks" {
   retain_acked_messages      = var.PUBSUB.retain_acked_messages
   ack_deadline_seconds       = var.PUBSUB.ack_deadline_seconds
   expiration_policy {
+    ttl = var.PUBSUB.expiration_policy_ttl
   }
 }
 
@@ -35,6 +36,7 @@ resource "google_pubsub_subscription" "btcl_transactions" {
   retain_acked_messages      = var.PUBSUB.retain_acked_messages
   ack_deadline_seconds       = var.PUBSUB.ack_deadline_seconds
   expiration_policy {
+    ttl = var.PUBSUB.expiration_policy_ttl
   }
 }
 
@@ -55,5 +57,6 @@ resource "google_pubsub_subscription" "ethl" {
   retain_acked_messages      = var.PUBSUB.retain_acked_messages
   ack_deadline_seconds       = var.PUBSUB.ack_deadline_seconds
   expiration_policy {
+    ttl = var.PUBSUB.expiration_policy_ttl
   }
 }
