@@ -67,6 +67,11 @@ variable "IP_ADDRESS_NAME_PREFIX" {
   type    = string
 }
 
+variable "ILB_IP_ADDRESS_NAME_PREFIX" {
+  default = ""
+  type    = string
+}
+
 variable "BTCL_CHAINS" {
   default = ["bitcoin", "bitcoin_cash", "dogecoin", "litecoin", "dash", "zcash"]
   type    = list(string)
