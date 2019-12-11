@@ -23,10 +23,11 @@ resource "google_container_cluster" "gke_cluster_0" {
     }
   }
   ip_allocation_policy {
-    use_ip_aliases    = true
-    create_subnetwork = true
-    subnetwork_name   = "${var.GKE_CLUSTER_NAME}-0"
+    cluster_secondary_range_name  = var.GKE_SECONDARY_PODS_NAME
+    services_secondary_range_name = var.GKE_SECONDARY_SERVICES_NAME
   }
+  subnetwork = google_compute_subnetwork.container_subnetwork.name
+  network    = google_compute_network.container_network.name
   network_policy {
     enabled = true
   }
