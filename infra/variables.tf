@@ -11,7 +11,8 @@ variable "GKE_CLUSTER_NAME" {
   type    = string
 }
 
-variable "GKE_MASTER_ZONE" {
+# there is no reason to have single zone GKE master, as regional master is free
+variable "GKE_MASTER_REGION" {
   default = ""
   type    = string
 }
@@ -26,6 +27,34 @@ variable "GKE_NODE_LOCATIONS" {
   type    = list(string)
 }
 
+variable "GKE_NETWORK_NAME" {
+  default = "default"
+  type    = string
+}
+variable "GKE_SUBNETWORK_NAME" {
+  default = ""
+  type    = string
+}
+variable "GKE_SUBNETWORK_ADDRESS_RANGE" {
+  default = "10.50.36.0/22"
+  type    = string
+}
+variable "GKE_SECONDARY_PODS_NAME" {
+  default = "gke-pods"
+  type    = string
+}
+variable "GKE_SECONDARY_PODS_ADDRESS_RANGE" {
+  default = "10.52.0.0/14"
+  type    = string
+}
+variable "GKE_SECONDARY_SERVICES_NAME" {
+  default = "gke-services"
+  type    = string
+}
+variable "GKE_SECONDARY_SERVICES_ADDRESS_RANGE" {
+  default = "10.50.0.0/20"
+  type    = string
+}
 variable "GKE_MASTER_AUTHORIZED_NETWORKS" {
   default = []
   type    = list(string)
@@ -67,6 +96,11 @@ variable "IP_ADDRESS_NAME_PREFIX" {
   type    = string
 }
 
+variable "ILB_IP_ADDRESS_NAME_PREFIX" {
+  default = ""
+  type    = string
+}
+
 variable "BTCL_CHAINS" {
   default = ["bitcoin", "bitcoin_cash", "dogecoin", "litecoin", "dash", "zcash"]
   type    = list(string)
@@ -96,7 +130,7 @@ variable "PUBSUB" {
     topic_name_prefix          = "crypto_"
     subscription_name_prefix   = "crypto_"
     subscription_name_suffix   = "dataflow.bigquery"
-    expiration_policy_ttl      = "" # empty means expire never 
+    expiration_policy_ttl      = "" # empty means never expire
   }
   type = map(any)
 }

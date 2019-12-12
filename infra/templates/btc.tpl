@@ -3,3 +3,6 @@ configurationFile:
   externalLBp2pIP: ${externalIP}
   rpcuser: "${rpcuser}"
   rpcpassword: "${rpcpassword}"
+
+internalLB: true
+internalLBIP: ${internalIP}

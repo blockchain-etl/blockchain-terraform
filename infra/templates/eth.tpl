@@ -4,3 +4,4 @@ externalLBp2pDiscovery: true
 externalLBp2pDiscoveryIP: ${externalIP}
 
 internalLB: true
+internalLBIP: ${internalIP}

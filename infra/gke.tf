@@ -2,7 +2,7 @@ resource "google_container_cluster" "gke_cluster_0" {
   depends_on     = [google_project_service.container_svc]
   project        = var.GCP_PROJECT_ID
   name           = var.GKE_CLUSTER_NAME
-  location       = var.GKE_MASTER_ZONE
+  location       = var.GKE_MASTER_REGION
   node_locations = var.GKE_NODE_LOCATIONS
 
   # We can't create a cluster with no node pool defined, but we want to only use
@@ -23,10 +23,11 @@ resource "google_container_cluster" "gke_cluster_0" {
     }
   }
   ip_allocation_policy {
-    use_ip_aliases    = true
-    create_subnetwork = true
-    subnetwork_name   = "${var.GKE_CLUSTER_NAME}-0"
+    cluster_secondary_range_name  = var.GKE_SECONDARY_PODS_NAME
+    services_secondary_range_name = var.GKE_SECONDARY_SERVICES_NAME
   }
+  subnetwork = google_compute_subnetwork.container_subnetwork.name
+  network    = google_compute_network.container_network.name
   network_policy {
     enabled = true
   }
@@ -55,7 +56,7 @@ resource "google_container_cluster" "gke_cluster_0" {
 resource "null_resource" "local_k8s_context" {
   depends_on = [google_container_cluster.gke_cluster_0]
   provisioner "local-exec" {
-    command = "gcloud container clusters get-credentials ${var.GKE_CLUSTER_NAME} --project=${var.GCP_PROJECT_ID} --zone=${var.GKE_MASTER_ZONE} && ( kubectl config delete-context ${var.K8S_CONTEXT}; kubectl config rename-context gke_${var.GCP_PROJECT_ID}_${var.GKE_MASTER_ZONE}_${var.GKE_CLUSTER_NAME} ${var.K8S_CONTEXT} )"
+    command = "gcloud container clusters get-credentials ${var.GKE_CLUSTER_NAME} --project=${var.GCP_PROJECT_ID} --zone=${var.GKE_MASTER_REGION} && ( kubectl config delete-context ${var.K8S_CONTEXT}; kubectl config rename-context gke_${var.GCP_PROJECT_ID}_${var.GKE_MASTER_REGION}_${var.GKE_CLUSTER_NAME} ${var.K8S_CONTEXT} )"
   }
 }
 
@@ -64,7 +65,7 @@ resource "google_container_node_pool" "gke_pool_0" {
   depends_on = [google_container_cluster.gke_cluster_0]
   project    = var.GCP_PROJECT_ID
   name       = var.GKE_NODE_POOL_NAME
-  location   = var.GKE_MASTER_ZONE
+  location   = var.GKE_MASTER_REGION
   cluster    = google_container_cluster.gke_cluster_0.name
 
   //  this is default behavior
