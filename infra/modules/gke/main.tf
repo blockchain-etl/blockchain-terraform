@@ -1,5 +1,5 @@
 resource "google_container_cluster" "gke_cluster_0" {
-  depends_on     = [google_project_service.container_svc]
+  //  depends_on     = [google_project_service.container_svc]
   project        = var.GCP_PROJECT_ID
   name           = var.GKE_CLUSTER_NAME
   location       = var.GKE_MASTER_REGION

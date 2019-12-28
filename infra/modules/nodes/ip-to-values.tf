@@ -1,6 +1,6 @@
 data template_file "node_values_template" {
   for_each = var.IP_LIST
-  template = file(format("templates/%s.tpl", each.value))
+  template = file(format("%s/templates/%s.tpl", path.module, each.value))
   vars = {
     externalIP = google_compute_address.chain[each.key].address
     internalIP = google_compute_address.ilb[each.key].address

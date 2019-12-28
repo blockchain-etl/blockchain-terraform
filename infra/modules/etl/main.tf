@@ -1,20 +1,20 @@
 resource "google_pubsub_topic" "btcl_blocks" {
-  project    = var.GCP_PROJECT_ID
-  depends_on = ["google_project_service.pubsub_svc"]
-  for_each   = toset(var.BTCL_CHAINS)
-  name       = format("%s%s.%s", var.PUBSUB.topic_name_prefix, each.key, "blocks")
+  project = var.GCP_PROJECT_ID
+  //  depends_on = [google_project_service.pubsub_svc]
+  for_each = toset(var.BTCL_CHAINS)
+  name     = format("%s%s.%s", var.PUBSUB.topic_name_prefix, each.key, "blocks")
 }
 
 resource "google_pubsub_topic" "btcl_transactions" {
-  project    = var.GCP_PROJECT_ID
-  depends_on = ["google_project_service.pubsub_svc"]
-  for_each   = toset(var.BTCL_CHAINS)
-  name       = format("%s%s.%s", var.PUBSUB.topic_name_prefix, each.key, "transactions")
+  project = var.GCP_PROJECT_ID
+  //  depends_on = [google_project_service.pubsub_svc]
+  for_each = toset(var.BTCL_CHAINS)
+  name     = format("%s%s.%s", var.PUBSUB.topic_name_prefix, each.key, "transactions")
 }
 
 resource "google_pubsub_subscription" "btcl_blocks" {
   project                    = var.GCP_PROJECT_ID
-  depends_on                 = ["google_pubsub_topic.btcl_blocks"]
+  depends_on                 = [google_pubsub_topic.btcl_blocks]
   for_each                   = toset(var.BTCL_CHAINS)
   name                       = format("%s%s.%s.%s", var.PUBSUB.subscription_name_prefix, each.key, var.PUBSUB.subscription_name_suffix, "blocks")
   topic                      = google_pubsub_topic.btcl_blocks[each.key].name
@@ -28,7 +28,7 @@ resource "google_pubsub_subscription" "btcl_blocks" {
 
 resource "google_pubsub_subscription" "btcl_transactions" {
   project                    = var.GCP_PROJECT_ID
-  depends_on                 = ["google_pubsub_topic.btcl_transactions"]
+  depends_on                 = [google_pubsub_topic.btcl_transactions]
   for_each                   = toset(var.BTCL_CHAINS)
   name                       = format("%s%s.%s.%s", var.PUBSUB.subscription_name_prefix, each.key, var.PUBSUB.subscription_name_suffix, "transactions")
   topic                      = google_pubsub_topic.btcl_transactions[each.key].name
@@ -41,15 +41,15 @@ resource "google_pubsub_subscription" "btcl_transactions" {
 }
 
 resource "google_pubsub_topic" "ethl" {
-  project    = var.GCP_PROJECT_ID
-  depends_on = ["google_project_service.pubsub_svc"]
-  for_each   = toset(var.ETHL_ENTITY_TYPES)
-  name       = format("%s%s.%s", var.PUBSUB.topic_name_prefix, "ethereum", each.key)
+  project = var.GCP_PROJECT_ID
+  //  depends_on = [google_project_service.pubsub_svc]
+  for_each = toset(var.ETHL_ENTITY_TYPES)
+  name     = format("%s%s.%s", var.PUBSUB.topic_name_prefix, "ethereum", each.key)
 }
 
 resource "google_pubsub_subscription" "ethl" {
   project                    = var.GCP_PROJECT_ID
-  depends_on                 = ["google_pubsub_topic.ethl"]
+  depends_on                 = [google_pubsub_topic.ethl]
   for_each                   = toset(var.ETHL_ENTITY_TYPES)
   name                       = format("%s%s.%s.%s", var.PUBSUB.subscription_name_prefix, "ethereum", var.PUBSUB.subscription_name_suffix, each.key)
   topic                      = google_pubsub_topic.ethl[each.key].name

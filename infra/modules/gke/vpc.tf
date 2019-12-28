@@ -1,6 +1,6 @@
 resource "google_compute_network" "container_network" {
-  project                 = var.GCP_PROJECT_ID
-  depends_on              = ["google_project_service.compute_svc"]
+  project = var.GCP_PROJECT_ID
+  //  depends_on              = [google_project_service.compute_svc]
   name                    = var.GKE_NETWORK_NAME
   auto_create_subnetworks = false
   routing_mode            = "GLOBAL"
