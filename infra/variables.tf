@@ -2,10 +2,22 @@ variable "GCP_PROJECT_ID" {
   default = ""
   type    = string
 }
+
+variable "GCP_NODES_PROJECT_ID" {
+  default = ""
+  type    = string
+}
+
+variable "GCP_ETL_PROJECT_ID" {
+  default = ""
+  type    = string
+}
+
 variable "GKE_NODES_SA_NAME" {
   default = ""
   type    = string
 }
+
 variable "GKE_CLUSTER_NAME" {
   default = ""
   type    = string
@@ -31,30 +43,37 @@ variable "GKE_NETWORK_NAME" {
   default = "default"
   type    = string
 }
+
 variable "GKE_SUBNETWORK_NAME" {
   default = ""
   type    = string
 }
+
 variable "GKE_SUBNETWORK_ADDRESS_RANGE" {
   default = "10.50.36.0/22"
   type    = string
 }
+
 variable "GKE_SECONDARY_PODS_NAME" {
   default = "gke-pods"
   type    = string
 }
+
 variable "GKE_SECONDARY_PODS_ADDRESS_RANGE" {
   default = "10.52.0.0/14"
   type    = string
 }
+
 variable "GKE_SECONDARY_SERVICES_NAME" {
   default = "gke-services"
   type    = string
 }
+
 variable "GKE_SECONDARY_SERVICES_ADDRESS_RANGE" {
   default = "10.50.0.0/20"
   type    = string
 }
+
 variable "GKE_MASTER_AUTHORIZED_NETWORKS" {
   default = []
   type    = list(string)
@@ -79,7 +98,6 @@ variable "GKE_NODE_IMAGE_TYPE" {
   default = ""
   type    = string
 }
-
 
 variable "K8S_CONTEXT" {
   default = ""
@@ -154,6 +172,7 @@ variable VALUES_PATH {
   default = ""
   type    = string
 }
+
 variable "ENV_NAME" {
   default = ""
   type    = string
