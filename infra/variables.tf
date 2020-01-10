@@ -152,23 +152,39 @@ variable "PUBSUB" {
   }
   type = map(any)
 }
+
 # list of IPs to create and tf template name to render values files to helm
 variable "IP_LIST" {
   default = {}
   type    = map(string)
 }
+
 # cryptonodes RPC user override, when required
 variable "NODES_USERS" {
   default = {}
   type    = map(string)
 }
+
 # cryptonodes RPC password override, when required
 variable "NODES_PASSWORDS" {
   default = {}
   type    = map(string)
 }
+
 # path where to store generated cryptonode helm values
-variable VALUES_PATH {
+variable NODES_VALUES_PATH {
+  default = ""
+  type    = string
+}
+
+# path where to store generated etl apps helm values
+variable ETL_VALUES_PATH {
+  default = ""
+  type    = string
+}
+
+# GCS bucket name where to store ETL apps state such as last parsed block
+variable "ETL_STATE_BUCKET_NAME" {
   default = ""
   type    = string
 }

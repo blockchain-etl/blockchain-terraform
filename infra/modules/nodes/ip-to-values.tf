@@ -8,6 +8,8 @@ data template_file "node_values_template" {
     rpcuser = lookup(var.NODES_USERS, each.key, each.key)
     # check NODES_PASSWORDS for override or use generated
     rpcpassword = lookup(var.NODES_PASSWORDS, each.key, random_string.node_rpc_password[each.key].result)
+    # unused variable, just for the output
+    name = each.key
   }
 }
 resource "random_string" "node_rpc_password" {

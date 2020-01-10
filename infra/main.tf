@@ -37,7 +37,7 @@ module "nodes" {
   IP_LIST                    = var.IP_LIST
   NODES_USERS                = var.NODES_USERS
   NODES_PASSWORDS            = var.NODES_PASSWORDS
-  VALUES_PATH                = format("%s/%s", path.root, var.VALUES_PATH)
+  VALUES_PATH                = format("%s/%s", path.root, var.NODES_VALUES_PATH)
   ENV_NAME                   = var.ENV_NAME
 }
 
@@ -47,4 +47,8 @@ module "etl" {
   BTCL_CHAINS       = var.BTCL_CHAINS
   ETHL_ENTITY_TYPES = var.ETHL_ENTITY_TYPES
   PUBSUB            = var.PUBSUB
+  NODES_ENDPOINTS   = module.nodes.nodes_endpoints
+  VALUES_PATH       = format("%s/%s", path.root, var.ETL_VALUES_PATH)
+  ENV_NAME          = var.ENV_NAME
+  STATE_BUCKET_NAME = var.ETL_STATE_BUCKET_NAME
 }

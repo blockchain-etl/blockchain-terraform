@@ -33,7 +33,7 @@ variable "NODES_PASSWORDS" {
   default = {}
   type    = map(string)
 }
-# path where to store generated cryptonode helm values
+# path where to store generated helm values
 variable "VALUES_PATH" {
   default = ""
   type    = string
