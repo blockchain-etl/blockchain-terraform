@@ -15,6 +15,7 @@ resource "null_resource" "delay" {
 }
 
 resource "google_project_iam_binding" "gke_nodes_iam_binding" {
+  # we need to wait some time after service account creation to add iam bindings to this account
   depends_on = [null_resource.delay]
   project    = var.GCP_PROJECT_ID
   for_each   = var.GKE_NODES_IAM_BINDING
