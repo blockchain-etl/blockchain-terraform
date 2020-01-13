@@ -53,15 +53,48 @@ variable "NODES_ENDPOINTS" {
   type    = map(any)
 }
 
-variable "NODES_NAMES" {
-  default = {
-    bitcoin  = ["btc-0", "btc-1"],
-    ethereum = ["eth-0", "eth-1"],
-  }
-  type = map(list(string))
-}
+//variable "NODES_NAMES" {
+//  default = {
+//    bitcoin  = ["btc-0", "btc-1"],
+//    dash = ["dash-0","dash-1"],
+//    ethereum = ["eth-0", "eth-1"],
+//  }
+//  type = map(list(string))
+//}
 
 variable "STATE_BUCKET_NAME" {
   default = ""
   type    = string
+}
+
+variable "BTCL_DEPLOYS" {
+  //  default = {
+  //    btc = {
+  //      chain = "bitcoin",
+  //      endpoints = "",
+  //      endpoints_ref= ["btc-0", "btc-1"]
+  //    }
+  //    dash = {
+  //      chain = "dash",
+  //      endpoints = "",
+  //      endpoints_ref= ["btc-1", "btc-0"]
+  //    }
+  //  }
+  type = map(any)
+}
+
+variable "ETHL_DEPLOYS" {
+  default = {
+    eth0_b = {
+      type      = "block",
+      template  = "eth",
+      endpoints = "",
+    }
+    eth0_t = {
+      type      = "trace",
+      template  = "eth",
+      endpoints = "",
+    }
+  }
+  type = map(map(string))
 }

@@ -45,6 +45,7 @@ module "etl" {
   source            = "./modules/etl"
   GCP_PROJECT_ID    = local.GCP_ETL_PROJECT_ID
   BTCL_CHAINS       = var.BTCL_CHAINS
+  BTCL_DEPLOYS      = var.BTCL_DEPLOYS
   ETHL_ENTITY_TYPES = var.ETHL_ENTITY_TYPES
   PUBSUB            = var.PUBSUB
   NODES_ENDPOINTS   = module.nodes.nodes_endpoints

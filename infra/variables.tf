@@ -134,6 +134,11 @@ variable "BTCL_CHAINS" {
 //  type    = list(string)
 //}
 
+variable "BTCL_DEPLOYS" {
+  default = {}
+  type    = map(any)
+}
+
 variable "ETHL_ENTITY_TYPES" {
   default = ["blocks", "transactions", "logs", "token_transfers", "traces", "contracts", "tokens"]
   type    = list(string)
