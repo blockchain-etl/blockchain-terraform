@@ -7,7 +7,7 @@ resource "google_compute_address" "chain" {
 }
 resource "google_compute_address" "ilb" {
   project = var.GCP_PROJECT_ID
-  //  depends_on = ["google_compute_subnetwork.container_subnetwork"]
+  //  depends_on = [google_compute_subnetwork.container_subnetwork]
   subnetwork   = google_compute_subnetwork.container_subnetwork.self_link
   region       = var.IP_ADDRESS_REGION
   for_each     = var.IP_LIST
