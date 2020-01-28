@@ -1,5 +1,5 @@
 resource "google_service_account" "gke_nodes" {
-  //  depends_on = ["google_project_service.iam_svc"]
+  //  depends_on = [google_project_service.iam_svc]
   project      = var.GCP_PROJECT_ID
   account_id   = var.GKE_NODES_SA_NAME
   display_name = "GKE nodes service account"
