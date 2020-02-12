@@ -16,7 +16,7 @@ resource "kubernetes_service_account" "tiller" {
 resource "kubernetes_cluster_role_binding" "tiller" {
   //  count = 0
   depends_on = [
-    "kubernetes_service_account.tiller",
+    kubernetes_service_account.tiller,
   ]
 
   metadata {
