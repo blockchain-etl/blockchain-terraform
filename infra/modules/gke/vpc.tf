@@ -2,6 +2,7 @@ resource "google_compute_network" "container_network" {
   project = var.GCP_PROJECT_ID
   //  depends_on              = [google_project_service.compute_svc]
   name                    = var.GKE_NETWORK_NAME
+  description             = "auto-created network for cluster ${var.GKE_CLUSTER_NAME}"
   auto_create_subnetworks = false
   routing_mode            = "GLOBAL"
 }

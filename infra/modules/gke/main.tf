@@ -5,8 +5,8 @@ resource "google_container_cluster" "gke_cluster_0" {
   location       = var.GKE_MASTER_REGION
   node_locations = var.GKE_NODE_LOCATIONS
 
-  # We can't create a cluster with no node pool defined, but we want to only use
-  # separately managed node pools. So we create the smallest possible default
+  # We can't create a cluster with no node pool defined, but we want to use
+  # separately managed node pools only. So we create the smallest possible default
   # node pool and immediately delete it.
   remove_default_node_pool = true
   initial_node_count       = 1
