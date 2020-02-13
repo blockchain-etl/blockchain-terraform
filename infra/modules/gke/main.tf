@@ -92,7 +92,7 @@ resource "google_container_node_pool" "gke_pool_0" {
     disk_size_gb = var.GKE_NODE_DISK_SIZE
     disk_type    = var.GKE_NODE_DISK_TYPE
 
-    preemptible  = true
+    preemptible  = var.GKE_NODE_PREEMPTIBLE
     machine_type = var.GKE_NODE_MACHINE_TYPE
     image_type   = var.GKE_NODE_IMAGE_TYPE
     metadata = {

@@ -99,6 +99,11 @@ variable "GKE_NODE_IMAGE_TYPE" {
   type    = string
 }
 
+variable "GKE_NODE_PREEMPTIBLE" {
+  default = true
+  type    = bool
+}
+
 variable "K8S_CONTEXT" {
   default = ""
   type    = string

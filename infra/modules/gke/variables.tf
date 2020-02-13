@@ -80,6 +80,11 @@ variable "GKE_NODE_IMAGE_TYPE" {
   type    = string
 }
 
+variable "GKE_NODE_PREEMPTIBLE" {
+  default = true
+  type    = bool
+}
+
 variable "GKE_NODES_IAM_BINDING" {
   type = set(string)
   default = [

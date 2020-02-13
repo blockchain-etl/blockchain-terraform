@@ -24,6 +24,7 @@ module "gke_nodes" {
   GKE_NODE_DISK_TYPE                   = var.GKE_NODE_DISK_TYPE
   GKE_NODE_MACHINE_TYPE                = var.GKE_NODE_MACHINE_TYPE
   GKE_NODE_IMAGE_TYPE                  = var.GKE_NODE_IMAGE_TYPE
+  GKE_NODE_PREEMPTIBLE                 = var.GKE_NODE_PREEMPTIBLE
   K8S_CONTEXT                          = var.K8S_CONTEXT
 }
 
