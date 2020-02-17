@@ -13,10 +13,10 @@ variable "BTCL_CHAINS" {
 //  type    = list(string)
 //}
 //
-//variable "ETHL_CHAINS" {
-//  default = ["ethereum"]
-//  type    = list(string)
-//}
+variable "ETHL_CHAINS" {
+  default = []
+  type    = list(string)
+}
 
 variable "ETHL_ENTITY_TYPES" {
   default = []
@@ -84,17 +84,5 @@ variable "BTCL_DEPLOYS" {
 }
 
 variable "ETHL_DEPLOYS" {
-  default = {
-    eth0_b = {
-      type      = "block",
-      template  = "eth",
-      endpoints = "",
-    }
-    eth0_t = {
-      type      = "trace",
-      template  = "eth",
-      endpoints = "",
-    }
-  }
-  type = map(map(string))
+  type = map(any)
 }

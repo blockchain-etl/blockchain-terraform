@@ -134,12 +134,17 @@ variable "BTCL_CHAINS" {
 //  type    = list(string)
 //}
 //
-//variable "ETHL_CHAINS" {
-//  default = ["ethereum"]
-//  type    = list(string)
-//}
+variable "ETHL_CHAINS" {
+  default = ["eth", "etc", "kovan"]
+  type    = list(string)
+}
 
 variable "BTCL_DEPLOYS" {
+  default = {}
+  type    = map(any)
+}
+
+variable "ETHL_DEPLOYS" {
   default = {}
   type    = map(any)
 }
