@@ -1,4 +1,4 @@
-## we should not remove SA abd binding before removing all helm releases
+## we should not remove SA and binding before removing all helm releases
 resource "kubernetes_service_account" "tiller" {
   //  count = 0
   metadata {

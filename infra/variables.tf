@@ -2,10 +2,22 @@ variable "GCP_PROJECT_ID" {
   default = ""
   type    = string
 }
+
+variable "GCP_NODES_PROJECT_ID" {
+  default = ""
+  type    = string
+}
+
+variable "GCP_ETL_PROJECT_ID" {
+  default = ""
+  type    = string
+}
+
 variable "GKE_NODES_SA_NAME" {
   default = ""
   type    = string
 }
+
 variable "GKE_CLUSTER_NAME" {
   default = ""
   type    = string
@@ -31,30 +43,37 @@ variable "GKE_NETWORK_NAME" {
   default = "default"
   type    = string
 }
+
 variable "GKE_SUBNETWORK_NAME" {
   default = ""
   type    = string
 }
+
 variable "GKE_SUBNETWORK_ADDRESS_RANGE" {
   default = "10.50.36.0/22"
   type    = string
 }
+
 variable "GKE_SECONDARY_PODS_NAME" {
   default = "gke-pods"
   type    = string
 }
+
 variable "GKE_SECONDARY_PODS_ADDRESS_RANGE" {
   default = "10.52.0.0/14"
   type    = string
 }
+
 variable "GKE_SECONDARY_SERVICES_NAME" {
   default = "gke-services"
   type    = string
 }
+
 variable "GKE_SECONDARY_SERVICES_ADDRESS_RANGE" {
   default = "10.50.0.0/20"
   type    = string
 }
+
 variable "GKE_MASTER_AUTHORIZED_NETWORKS" {
   default = []
   type    = list(string)
@@ -80,6 +99,10 @@ variable "GKE_NODE_IMAGE_TYPE" {
   type    = string
 }
 
+variable "GKE_NODE_PREEMPTIBLE" {
+  default = true
+  type    = bool
+}
 
 variable "K8S_CONTEXT" {
   default = ""
@@ -111,14 +134,38 @@ variable "BTCL_CHAINS" {
 //  type    = list(string)
 //}
 //
-//variable "ETHL_CHAINS" {
-//  default = ["ethereum"]
-//  type    = list(string)
-//}
+variable "ETHL_CHAINS" {
+  default = ["eth", "etc", "kovan"]
+  type    = list(string)
+}
+
+variable "BTCL_DEPLOYS" {
+  default = {}
+  type    = map(any)
+}
+
+variable "ETHL_DEPLOYS" {
+  default = {}
+  type    = map(any)
+}
 
 variable "ETHL_ENTITY_TYPES" {
   default = ["blocks", "transactions", "logs", "token_transfers", "traces", "contracts", "tokens"]
   type    = list(string)
+}
+
+variable "PUBSUB" {
+  # 7 days
+  default = {
+    message_retention_duration = "604800s"
+    retain_acked_messages      = true
+    ack_deadline_seconds       = 30
+    topic_name_prefix          = "crypto_"
+    subscription_name_prefix   = "crypto_"
+    subscription_name_suffix   = "dataflow.bigquery"
+    expiration_policy_ttl      = "" # empty means never expire
+  }
+  type = map(any)
 }
 
 # list of IPs to create and tf template name to render values files to helm
@@ -126,21 +173,37 @@ variable "IP_LIST" {
   default = {}
   type    = map(string)
 }
+
 # cryptonodes RPC user override, when required
 variable "NODES_USERS" {
   default = {}
   type    = map(string)
 }
+
 # cryptonodes RPC password override, when required
 variable "NODES_PASSWORDS" {
   default = {}
   type    = map(string)
 }
+
 # path where to store generated cryptonode helm values
-variable VALUES_PATH {
+variable NODES_VALUES_PATH {
   default = ""
   type    = string
 }
+
+# path where to store generated etl apps helm values
+variable ETL_VALUES_PATH {
+  default = ""
+  type    = string
+}
+
+# GCS bucket name where to store ETL apps state such as last parsed block
+variable "ETL_STATE_BUCKET_NAME" {
+  default = ""
+  type    = string
+}
+
 variable "ENV_NAME" {
   default = ""
   type    = string

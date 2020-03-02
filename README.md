@@ -27,7 +27,7 @@ terragrunt plan
 ```bash
 terragrunt apply -auto-approve
 ```
-We should get infrastrucrute similar to following scheme [<img src="./images/tf0.svg">](./images/tf0.svg)
+We should get infrastructure similar to following scheme [<img src="./images/tf0.svg">](./images/tf0.svg)
 
 Similar for basic preparations inside k8s
 ```bash

@@ -1,12 +1,12 @@
 resource "google_container_cluster" "gke_cluster_0" {
-  depends_on     = [google_project_service.container_svc]
+  //  depends_on     = [google_project_service.container_svc]
   project        = var.GCP_PROJECT_ID
   name           = var.GKE_CLUSTER_NAME
   location       = var.GKE_MASTER_REGION
   node_locations = var.GKE_NODE_LOCATIONS
 
-  # We can't create a cluster with no node pool defined, but we want to only use
-  # separately managed node pools. So we create the smallest possible default
+  # We can't create a cluster with no node pool defined, but we want to use
+  # separately managed node pools only. So we create the smallest possible default
   # node pool and immediately delete it.
   remove_default_node_pool = true
   initial_node_count       = 1
@@ -92,7 +92,7 @@ resource "google_container_node_pool" "gke_pool_0" {
     disk_size_gb = var.GKE_NODE_DISK_SIZE
     disk_type    = var.GKE_NODE_DISK_TYPE
 
-    preemptible  = true
+    preemptible  = var.GKE_NODE_PREEMPTIBLE
     machine_type = var.GKE_NODE_MACHINE_TYPE
     image_type   = var.GKE_NODE_IMAGE_TYPE
     metadata = {
