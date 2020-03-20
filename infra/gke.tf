@@ -1,4 +1,5 @@
 resource "google_container_cluster" "gke_cluster_0" {
+  provider       = google-beta
   depends_on     = [google_project_service.container_svc]
   project        = var.GCP_PROJECT_ID
   name           = var.GKE_CLUSTER_NAME
@@ -44,7 +45,10 @@ resource "google_container_cluster" "gke_cluster_0" {
       }
     }
   }
-
+  database_encryption {
+    state    = "ENCRYPTED"
+    key_name = google_kms_crypto_key.crypto_key_0.self_link
+  }
   min_master_version = "latest"
   timeouts {
     create = "30m"

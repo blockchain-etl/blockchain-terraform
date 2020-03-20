@@ -10,14 +10,9 @@ provider "local" {
   version = "~> 1.4"
 }
 
-provider "null" {
-  version = "~> 2.1"
-}
-
-provider "template" {
-  version = "~> 2.1"
-}
-
-provider "random" {
-  version = "~> 2.2"
+## beta provider
+provider "google-beta" {
+  project = var.GCP_PROJECT_ID
+  # gke requires this, incorrectly?
+  region = var.GKE_MASTER_REGION
 }
