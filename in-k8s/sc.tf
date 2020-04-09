@@ -3,7 +3,7 @@ resource "kubernetes_storage_class" "sc_ssd_regional" {
     name = "ssd-regional-${var.K8S_SC_SUFFIX}"
   }
   storage_provisioner = "kubernetes.io/gce-pd"
-  reclaim_policy      = "Retain"
+  reclaim_policy      = "Delete"
   parameters = {
     type             = "pd-ssd"
     replication-type = "regional-pd"
@@ -15,7 +15,7 @@ resource "kubernetes_storage_class" "sc_standard_regional" {
     name = "standard-regional-${var.K8S_SC_SUFFIX}"
   }
   storage_provisioner = "kubernetes.io/gce-pd"
-  reclaim_policy      = "Retain"
+  reclaim_policy      = "Delete"
   parameters = {
     type             = "pd-standard"
     replication-type = "regional-pd"
